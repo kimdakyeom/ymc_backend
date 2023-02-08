@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.core.validators import MinValueValidator, MaxValueValidator
+from articles.models import Team
 
 
 class UserManager(BaseUserManager):
@@ -48,6 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["nickname"]
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.nickname
