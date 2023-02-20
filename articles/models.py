@@ -1,16 +1,15 @@
 from django.db import models
+from django.conf import settings
 
-# from accounts.models import User
+class Article(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="article_user")
+    title = models.CharField("제목", max_length=100)
+    content = models.TextField("본문")
+    created_at = models.DateTimeField("생성시간", auto_now_add=True)
+    modified_at = models.DateTimeField("수정시간", auto_now=True)
 
-# class Article(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-#     title = models.CharField("제목", max_length=100)
-#     content = models.TextField("본문")
-#     created_at = models.DateTimeField("생성시간", auto_now_add=True)
-#     modified_at = models.DateTimeField("수정시간", auto_now=True)
-
-#     class Meta:
-#         ordering = ["-created_at"]
+    class Meta:
+        ordering = ["-created_at"]
 
 
 # class Comment(models.Model):
