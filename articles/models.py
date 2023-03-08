@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+
 class Article(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="article_user")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="article_user"
+    )
     title = models.CharField("제목", max_length=100)
     content = models.TextField("본문")
     created_at = models.DateTimeField("생성시간", auto_now_add=True)
