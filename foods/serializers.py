@@ -3,10 +3,26 @@ from .models import *
 from rest_framework import serializers
 
 
+class StoreImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoreImage
+        fields = "__all__"
+
+
 class StoreSerializer(serializers.ModelSerializer):
+    store_image = StoreImageSerializer(many=True, read_only=True)
+
     class Meta:
         model = Store
-        fields = "__all__"
+        fields = [
+            "name",
+            "lat",
+            "lon",
+            "stadium",
+            "items",
+            "detail",
+            "store_image",
+        ]
 
 
 class ReviewSerializer(serializers.ModelSerializer):

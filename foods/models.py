@@ -2,6 +2,8 @@ from django.db import models
 from articles.models import Stadium
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 # 내부 매점
 class Store(models.Model):
@@ -15,6 +17,19 @@ class Store(models.Model):
     items = models.TextField()
     # 상세 위치
     detail = models.TextField()
+
+
+class StoreImage(models.Model):
+    store = models.ForeignKey(
+        Store, on_delete=models.CASCADE, related_name="store_image"
+    )
+    image = ProcessedImageField(
+        upload_to="images/",
+        blank=True,
+        processors=[ResizeToFill(1200, 960)],
+        format="JPEG",
+        options={"quality": 80},
+    )
 
 
 class Review(models.Model):

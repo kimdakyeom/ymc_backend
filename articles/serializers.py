@@ -18,8 +18,10 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = "__all__"
 
+
 class ArticleSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.nickname')
+    user = serializers.ReadOnlyField(source="user.nickname")
+
     class Meta:
         model = Article
         fields = "__all__"
